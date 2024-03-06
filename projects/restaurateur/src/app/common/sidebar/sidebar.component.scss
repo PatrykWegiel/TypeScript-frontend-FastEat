@@ -1,0 +1,121 @@
+// COMMON 
+$orange: #e68b39;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+.bg-white {
+    background-color: #fff;
+}
+
+.bi {
+    padding-right: 0.5rem;
+}
+
+.bi.bi-large {
+    font-size: 1.5rem; 
+    padding-right: 1rem;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 2 * 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        width: 100%;
+    }
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link, .nav-item .btn-toggle {
+    font-weight: 500;
+    color: #b5bac0;
+    text-transform: uppercase;
+    font-family: 'Rubik', sans-serif;
+}
+
+.sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #727272;
+}
+
+.sidebar .nav-link.active {
+    color: $orange; 
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+    color: inherit;
+}
+
+.sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+}
+
+///////////////
+
+  
+.btn-toggle {
+    display: inline-flex;
+    width: 100%;
+    padding: .5rem 1rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    background-color: transparent;
+    border: 0;
+}
+
+.btn-toggle:hover,
+.btn-toggle:focus {
+    color: rgba(0, 0, 0, .85);
+    box-shadow: none
+}
+
+.btn-toggle::before {
+    width: 24px;
+    margin-right: 8px;
+    line-height: 0;
+    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3e%3cpath fill='none' stroke='rgba%280,0,0,0.65%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    transition: transform .35s ease;
+    transform-origin: .5em 50%;
+}
+
+.btn-toggle[aria-expanded="true"] {
+    color: rgba(0, 0, 0, .85);
+}
+
+.btn-toggle[aria-expanded="true"]::before {
+    transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+    display: inline-flex;
+    padding: .1875rem .5rem;
+    margin-top: .125rem;
+    margin-left: 1.25rem;
+    text-decoration: none;
+}
+
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+    color: rgba(0, 0, 0, 1);
+    font-weight: 500;
+}
+
+.logout > span {
+    color: $orange;
+}

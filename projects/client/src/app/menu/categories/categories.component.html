@@ -1,0 +1,11 @@
+<div *ngFor="let category of menu?.categories" class="col-9 product-card">
+    <div class="col-12 category">
+        <h3>{{category.name}}</h3>
+        <p>{{category.description}}</p>
+    </div>
+    <div class="row">
+        <div *ngFor="let product of category.items" class="col-12">
+            <app-products [product]="product" (productAdded)="addProductToCart($event)"></app-products>
+        </div>
+    </div>
+</div>

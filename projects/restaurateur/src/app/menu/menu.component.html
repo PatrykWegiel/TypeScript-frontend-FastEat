@@ -1,0 +1,11 @@
+<div *ngIf="!menuExist; else loadMenu">
+    <div class="menu-none text-center">
+        <p>{{menuError}}</p>
+        <button class="w-100 btn btn-lg btn-secondary 
+        rounded-0 text-white" type="button" (click)="onAddNewMenu()">Add a new menu</button>
+    </div>
+</div>
+
+<ng-template #loadMenu>
+    <app-menu-edit [menu]="menu"></app-menu-edit>
+</ng-template>

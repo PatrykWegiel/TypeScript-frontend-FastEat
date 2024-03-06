@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light col-12"> 
+   <div class="col-10 navbar-text">
+   
+    <a routerLink="">
+       <h1>FAST EAT</h1>
+       </a></div>
+  <div class="col-2" style="height: 100%;">
+    <a class="login" routerLink="{{getNavbarAuthenticationLink()}}"
+      *ngIf="getUsername() === null; else notAuthenticated">{{getNavbarAuthenticationDescription()}}</a>
+    <ng-template #notAuthenticated>
+      <div class="dropdown">
+        <div class="user">
+          {{username}}
+          <img [src]="getUserImage()" class="img-circle img-responsive" height="50" alt="user icon" loading="lazy">
+        </div>
+        <div class="dropdown-content">
+          <div class="dropdown-element">
+            <a routerLink="/account" class="navbar-brand">Moje konto</a>
+          </div>
+          <div class="dropdown-element">
+            <a routerLink="/orders" class="navbar-brand">Moje zamówienia</a>
+          </div>
+          <div class="dropdown-element">
+            <a routerLink="/login" class="navbar-brand" (click)="onLogout()">Wyloguj</a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</nav>

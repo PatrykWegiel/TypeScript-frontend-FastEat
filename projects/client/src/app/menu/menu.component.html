@@ -1,0 +1,14 @@
+<div class="main">
+  <div class="container">
+    <app-product-selection *ngIf="selectedProduct != undefined" [product]="selectedProduct"
+      (onModalClose)="addProductToCart($event)"></app-product-selection>
+    <ng-template [ngIf]="restaurant != undefined">
+      <h1>{{restaurant.name}}</h1>
+      <div class="row">
+        <app-categories [menuId]="restaurant.menu" (productAdded)="selectProduct($event)"></app-categories>
+      </div>
+    </ng-template>
+  </div>
+  <app-cartbar [restaurantId]="restaurantId" [cart]="cart" [deliveryCost]="restaurant?.deliveryCost" (productRemoved)="removeProductFromCart($event)"
+    (quantityChanged)="changeCartItemQuantity($event)"></app-cartbar>
+</div>

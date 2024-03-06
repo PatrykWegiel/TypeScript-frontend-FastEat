@@ -1,0 +1,49 @@
+<div class="row justify-content-center align-items-center h-100">
+  <div class="col-12 col-lg-9 col-xl-5">
+    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+      <div class="card-body p-4 p-md-5">
+        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Rejestracja</h3>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+          <div class="col-md-6 mb-4 register-input">
+            <div class="form-outline">
+              <label class="form-label" for="login">Login</label>
+              <input type="text" id="login" required ngModel name="login" class="form-control form-control-lg"
+                placeholder="Login" />
+                <div *ngIf="form?.controls?.login?.touched && form?.controls?.login?.errors?.['required']">This field may not be empty.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4 pb-2 register-input">
+
+            <div class="form-outline">
+              <label class="form-label" for="emailAddress">Email</label>
+              <input type="email" required email id="emailAddress" ngModel name="emailAddress" class="form-control form-control-lg"
+                placeholder="Adres email" />
+                <div *ngIf="form?.controls?.emailAddress?.touched && form?.controls?.emailAddress?.errors?.['required']">This field may not be empty.</div>
+                <div *ngIf="form?.controls?.emailAddress?.touched && form?.controls?.emailAddress?.errors?.['email']">This field should be a valid email address.</div>
+            </div>
+
+          </div>
+
+          <div class="col-md-6 mb-4 register-input">
+
+            <div class="form-outline">
+              <label class="form-label" for="pswd">Hasło</label>
+              <input type="password" required id="pswd" ngModel name="password" class="form-control form-control-lg"
+                placeholder="******" />
+                <div *ngIf="form?.controls?.password?.touched && form?.controls?.password?.errors?.['required']">This field may not be empty.</div>
+            </div>
+
+          </div>
+
+          <div class="mt-4 pt-2">
+            <button class="btn btn-primary btn-lg" type="submit" [ngClass]="{disabled: form?.status === 'INVALID'}"
+              style="background-color: #f86600; border-color:#f86600;">Zarejestruj</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

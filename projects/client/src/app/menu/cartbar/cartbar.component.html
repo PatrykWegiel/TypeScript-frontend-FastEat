@@ -1,0 +1,43 @@
+
+<aside class="cart-sidebar">
+  <div class="cart-body">
+    <div id="cart-header" class="cart-header">
+      <p>Koszyk</p>
+    </div>
+    <div id="cart-item-list" class="cart-list banner-innerpage">
+      <div *ngFor="let cartItem of cart?.cartItems" class="card-group vgr-cards col-12">
+        <div class="col-7">
+          <p class="card-title cartName">{{cartItem.item.name}}</p>
+        </div>
+        <div class="col-5 right-btn">
+          <button (click)="removeProductFromCart(cartItem.id)" class="remove-button">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        <div class="col-12 product-addons"> {{getProductSelectedAddons(cartItem)}}</div>
+        <div class="col-9">{{getProductPrice(cartItem)/100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}} </div>
+        <div class="col-1 right-btn">
+          <button (click)="changeQuantity(cartItem.id, false)" class="count-button">
+            <i class="bi bi-dash"></i>
+          </button>
+        </div>
+        <div class="col-1 cart-item-count">
+          <p class="count">{{cartItem.amount}}</p>
+        </div>
+        <div class="col-1">
+          <button (click)="changeQuantity(cartItem.id, true)" class="count-button">
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <p>Kwota zamówienia: {{cart.sum /100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}</p>
+      <p>Koszt dostawy: {{deliveryCost | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}</p>
+      <p>Łącznie: {{(cart.sum + deliveryCost * 100) / 100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}</p>
+      <a routerLink="/cart/{{restaurantId}}" class="nav-link">
+        <button class="btn btn-outline-primary cart-btn" type="button">Zamawiam</button>
+      </a>
+    </div>
+  </div>
+</aside>

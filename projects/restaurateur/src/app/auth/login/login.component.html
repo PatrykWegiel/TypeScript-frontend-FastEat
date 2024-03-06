@@ -1,0 +1,19 @@
+<div class="form-signin">
+    <form [formGroup]="signInForm" (submit)="onSignIn()">
+      <div class="form-floating">
+        <input type="email" [ngClass]="{error: errorKeyExist(['email', 'non_field_errors'])}" class="form-control rounded-0" id="email" placeholder="name@example.com" formControlName="email">
+        <label for="email">Email address</label>
+        <p class="error-label" *ngIf="errorKeyExist(['email'])">{{getErrorKey('email')}}</p>
+      </div>
+      <div class="form-floating">
+        <input type="password" [ngClass]="{error: errorKeyExist(['password', 'non_field_errors'])}" class="form-control rounded-0 m-0" id="password" placeholder="Password" formControlName="password">
+        <label for="password">Password</label>
+        <p class="error-label" *ngIf="errorKeyExist(['password'])">{{getErrorKey('password')}}</p>
+      </div>
+      <p class="error-label" *ngIf="errorKeyExist(['non_field_errors'])">{{getErrorKey('non_field_errors')}}</p>
+      <button class="w-100 btn btn-lg btn-secondary rounded-0 text-white" type="submit">Continue</button>
+    </form>
+    <div>
+      <a class="registration-link" [routerLink]="['/sign-up']" routerLinkActive="router-link-active" >register your restaurant</a>
+    </div>
+</div>

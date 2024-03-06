@@ -1,0 +1,54 @@
+$orange: #e68b39;
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Solid&family=Rubik:wght@300&display=swap');
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 2rem;
+    font-family: 'Rubik', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.navbar-brand span{
+    font-family: 'Londrina Solid', cursive;
+    text-transform: lowercase;
+}
+
+.navbar .navbar-toggler {
+    top: .25rem;
+    right: 1rem;
+    border: none
+}
+
+.navbar .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: none
+}
+
+.navbar-toggler[aria-expanded="false"] .bi-chevron-up{
+    display: none;
+}
+
+.navbar-toggler[aria-expanded="true"] .bi-chevron-down{
+    display: none;
+}
+
+.navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+}
+
+.form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}

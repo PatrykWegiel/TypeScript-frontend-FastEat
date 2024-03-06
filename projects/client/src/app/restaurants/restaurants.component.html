@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container">
+  <app-searchbar placeHolder="Restaurants" (textFilterParam)="filterVenues($event)"></app-searchbar>
+  <div class="row">
+    <div class="col-9">
+        <app-restaurants-list [venues]=venues ></app-restaurants-list>
+    </div>
+    <div class="col-3">
+      <app-infobar [cityName]=cityName (listFiltered)="filterList($event)"></app-infobar>
+    </div>
+  </div>
+</div>

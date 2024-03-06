@@ -1,0 +1,120 @@
+h1 {
+  margin: 1.4rem 0;
+  display: flex;
+  flex-direction: row;
+}
+
+h1:before,
+h1:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
+  margin: auto;
+}
+
+h1:before {
+  margin-right: 10px
+}
+
+h1:after {
+  margin-left: 10px
+}
+
+.add-image {
+  font-size: 25px;
+  position: absolute;
+  width: 35px;
+  bottom: 0;
+  left: 100px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: blue;
+  text-align: center;
+}
+
+.add-image:hover {
+  background-color: blue;
+  color: white;
+  transition: background-color 0.5s ease;
+}
+
+.user-avatar {
+  height: 150px;
+  position: relative;
+}
+
+.user-avatar img {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.user-panel {
+  margin: 0 auto;
+  width: 600px;
+  display: flex;
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.user-info {
+  margin-left: 5%;
+}
+
+h1 {
+  margin: 1.4rem 0;
+  display: flex;
+  flex-direction: row;
+}
+
+h1:before,
+h1:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
+  margin: auto;
+}
+
+h1:before {
+  margin-right: 10px
+}
+
+h1:after {
+  margin-left: 10px
+}
+
+input {
+  margin: 1rem 0;
+}
+
+.tooltip {
+  opacity: 1;
+  width: 100%;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  right: 0;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.invalid-tooltip {
+  display: block;
+  right: 5px;
+  top: 17%;
+}
+
+input:invalid{
+  border-color: red;
+}

@@ -1,0 +1,97 @@
+<div class="form-signup">
+    <p class="text-center">Let us know each other</p>
+    <form [formGroup]="signUpForm" (submit)="onSignUp()">
+      <div class="form-floating">
+        <input type="text" class="form-control rounded-0" id="restaurantName" placeholder="name" formControlName="restaurantName">
+        <label for="restaurantName">Name</label>
+        <div class="error-label" *ngIf="restaurantName?.touched && restaurantName?.errors?.['required']">
+          This field may not be null.
+        </div>
+      </div>
+      <div class="kitchenTypes">
+        <div class="kitchenTypes-list">
+          <span class="badge rounded-pill bg-orange" *ngFor="let kitchenType of chosenKitchenTypes">
+            {{kitchenType.kitchenType}}
+            <span data-role="remove" (click)="onRemoveKitchenType(kitchenType.id)"></span>
+          </span>
+        </div>
+        <div class="kitchenTypes-button">
+          <select *ngIf="isMaxAmountOfTypesSelected()" class="form-select rounded-0" formControlName="kitchenTypes" (change)="onChange()">
+              <option [ngValue]="null" disabled>Types of your cuisine</option>
+              <option *ngFor="let kitchenType of kitchenTypes" [ngValue]="kitchenType.id">
+               {{ kitchenType.kitchenType }}
+              </option>
+            </select>
+        </div>
+      </div>
+      
+      <div class="row mt-3">
+          <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-0" id="restaurantStreet" placeholder="name" formControlName="restaurantStreet">
+                <label for="restaurantStreet">Street</label>
+                <div class="error-label" *ngIf="restaurantStreet?.touched && restaurantStreet?.errors?.['required']">
+                  This field may not be null.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-0" id="restaurantCity" placeholder="name" formControlName="restaurantCity">
+                <label for="restaurantCity">City</label>
+                <div class="error-label" *ngIf="restaurantCity?.touched && restaurantCity?.errors?.['required']">
+                  This field may not be null.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-0" id="restaurantZipCode" placeholder="name" formControlName="restaurantZipCode">
+                <label for="restaurantZipCode">Zip code</label>
+                <div class="error-label" *ngIf="restaurantZipCode?.touched && restaurantZipCode?.errors?.['required']">
+                  This field may not be null.
+                </div>
+                <div class="error-label" *ngIf="restaurantZipCode?.touched && restaurantZipCode?.errors?.['pattern']">
+                  This field should be in XX-XXX format.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control rounded-0" id="restaurantPhoneNumber" placeholder="name" formControlName="restaurantPhoneNumber">
+                <label for="restaurantPhoneNumber">Phone number</label>
+                <div class="error-label" *ngIf="restaurantPhoneNumber?.touched && restaurantPhoneNumber?.errors?.['required']">
+                  This field may not be null.
+                </div>
+                <div class="error-label" *ngIf="restaurantPhoneNumber?.touched && (restaurantPhoneNumber?.errors?.['min'] || restaurantPhoneNumber?.errors?.['max'] || restaurantPhoneNumber?.errors?.['pattern'])">
+                  This field should contain 9-12 numbers.
+                </div>
+              </div>
+          </div>
+          <div class="col-6">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control rounded-0" id="ownerEmail" placeholder="name" formControlName="ownerEmail">
+                <label for="ownerEmail">Email</label>
+                <div class="error-label" *ngIf="ownerEmail?.touched && ownerEmail?.errors?.['required']">
+                  This field may not be null.
+                </div>
+                <div class="error-label" *ngIf="ownerEmail?.touched && ownerEmail?.errors?.['email']">
+                  This field should be a valid email address.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-0" id="ownerUsername" placeholder="name" formControlName="ownerUsername">
+                <label for="ownerUsername">Username</label>
+                <div class="error-label" *ngIf="ownerUsername?.touched && ownerUsername?.errors?.['required']">
+                  This field may not be null.
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-0" id="ownerPassword" placeholder="name" formControlName="ownerPassword">
+                <label for="ownerPassword">Password</label>
+                <div class="error-label" *ngIf="ownerPassword?.touched && ownerPassword?.errors?.['required']">
+                  This field may not be null.
+                </div>
+              </div>
+              <button class="w-100 btn btn-lg btn-secondary rounded-0 text-white" [ngClass]="{disabled: signUpForm.status !== 'VALID'}" type="submit">Register</button>
+          </div>
+      </div>
+    </form>
+    <div>
+      <a class="registration-link" [routerLink]="['/login']" routerLinkActive="router-link-active">back to the login page</a>
+    </div>
+</div>

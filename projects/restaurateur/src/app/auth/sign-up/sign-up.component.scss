@@ -1,0 +1,80 @@
+$orange: #e68b39;
+* {
+  font-family: 'Rubik', sans-serif;
+  color: #666;
+}
+input:focus{
+    box-shadow: none;
+    border-color: $orange;
+}
+
+select{
+  border-color: transparent;
+  overflow: auto
+}
+select:focus{
+  box-shadow: none;
+  border-color: transparent
+}
+
+.btn, .btn-lg{
+  font-size: small;
+  text-transform: uppercase;
+}
+.btn:focus{
+  box-shadow: none;
+}
+div .registration-link{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.registration-link{
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: small;
+}
+.registration-link:hover{
+  color: $orange;
+}
+
+.signup-subheader {
+    text-transform: uppercase;
+    font-size: smaller;
+}
+
+.badge span[data-role="remove"]::after{
+  content: "x";
+  padding: 0px 2px;
+  padding-left: .25rem;
+  color: wheat;
+  cursor: pointer;
+}
+
+.badge.bg-orange{
+  background-color: $orange;
+  color: white;
+  font-weight: 200;
+  margin: 0 .25rem;
+}
+
+.form-floating>.form-select {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+div.kitchenTypes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  .kitchenTypes-list{
+    flex-basis: 1;
+  }
+}
+
+.error-label{
+  padding-top: 0.3rem;
+  text-transform: uppercase;
+  font-size: .7rem;
+}

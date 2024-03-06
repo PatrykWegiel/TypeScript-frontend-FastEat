@@ -1,0 +1,222 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <form [formGroup]="menuForm" (ngSubmit)="onAddMenu()" #form="ngForm">
+        <div class="form-floating mb-3 position-relative required">
+          <input type="text" [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" class="form-control rounded-0" id="menuName" formControlName="menuName" placeholder="Name"
+            required>
+          <label for="menuName">Name</label>
+          <div class="invalid-tooltip"
+            *ngIf="getFormControl('menuName')?.invalid && (getFormControl('menuName')?.dirty || form.submitted)">
+            <i *ngIf="getFormControl('menuName')?.errors?.['required']">Field required</i>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <textarea class="form-control rounded-0" placeholder="Describe your menu" formControlName="menuDescription"
+            id="menuDescription" style="height: 100px"></textarea>
+          <label for="menuDescription">Description</label>
+        </div>
+        <div *ngIf="hasCategories()">
+          <div class="d-flex justify-content-between mt-5">
+            <p class="d-inline-flex">Categories</p>
+            <i class="bi bi-plus-lg me-2 bi-addCategory" (click)="onAddCategory()"></i>
+          </div>
+
+          <div class="row" *ngFor="let category of categories">
+            <div class="col-4 categoryName">
+              <div class="form-floating mb-3 position-relative required">
+                <input [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" type="text" class="form-control rounded-0" id="{{getCategoryNameId(category.id)}}"
+                  placeholder="Name" formControlName="{{getCategoryNameId(category.id)}}" required>
+                <label for="{{getCategoryNameId(category.id)}}">Name</label>
+                <div class="invalid-tooltip"
+                  *ngIf="getFormControl(getCategoryNameId(category.id))?.invalid && (getFormControl(getCategoryNameId(category.id))?.dirty || form.submitted)">
+                  <i *ngIf="getFormControl(getCategoryNameId(category.id))?.errors?.['required']">Field required</i>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <textarea class="form-control rounded-0" placeholder="Describe your menu"
+                  id="{{getCategoryDescriptionId(category.id)}}"
+                  formControlName="{{getCategoryDescriptionId(category.id)}}" style="height: 100px"></textarea>
+                <label for="{{getCategoryDescriptionId(category.id)}}">Description</label>
+              </div>
+            </div>
+            <div class="col-8">
+              <div class="accordion mb-5" id="{{getCategoryProductsId(category.id)}}">
+                <div class="accordion-item" *ngFor="let product of category.items">
+                  <h2 class="accordion-header" id="{{getUniqueHeadingId(category.id, product.id)}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="getUniqueContentIdWithHash(category.id, product.id)" aria-expanded="false"
+                      [attr.aria-controls]="getUniqueContentId(category.id, product.id)">
+                      {{getAccordionHeading(product.name)}}
+                    </button>
+                  </h2>
+                  <div id="{{getUniqueContentId(category.id, product.id)}}" class="accordion-collapse collapse"
+                    [attr.aria-labelledby]="getUniqueHeadingId(category.id, product.id)"
+                    [attr.data-bs-parent]="getCategoryProductsIdWithHash(category.id)">
+                    <div class="accordion-body">
+                      <div class="mb-3 row required">
+                        <label for="{{getProductNameId(category.id, product.id)}}"
+                          class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10 position-relative">
+                          <input [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" type="text" class="form-control rounded-0"
+                            id="{{getProductNameId(category.id, product.id)}}"
+                            formControlName="{{getProductNameId(category.id, product.id)}}" required>
+                          <div class="invalid-tooltip"
+                            *ngIf="getFormControl(getProductNameId(category.id, product.id))?.invalid && (getFormControl(getProductNameId(category.id, product.id))?.dirty || form.submitted)">
+                            <i *ngIf="getFormControl(getProductNameId(category.id, product.id))?.errors?.['required']">Field
+                              required</i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3 row required">
+                        <label for="{{getProductPriceId(category.id, product.id)}}"
+                          class="col-sm-2 col-form-label">Price</label>
+                        <div class="col-sm-10 position-relative">
+                          <input [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" type="text" class="form-control rounded-0"
+                            id="{{getProductPriceId(category.id, product.id)}}"
+                            formControlName="{{getProductPriceId(category.id, product.id)}}" required>
+                          <div class="invalid-tooltip"
+                            *ngIf="getFormControl(getProductPriceId(category.id, product.id))?.invalid && getFormControl(getProductPriceId(category.id, product.id))?.dirty">
+                            <i *ngIf="getFormControl(getProductPriceId(category.id, product.id))?.errors?.['required']">Field
+                              required</i>
+                            <i
+                              *ngIf="getFormControl(getProductPriceId(category.id, product.id))?.errors?.['invalidPrice']">Invalid price</i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <div class="col-sm-2 col-form-label">Addons</div>
+                        <div class="col-sm-10 position-relative">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" style="width:100%;"
+                            [attr.data-target]="getAddonModalIdWithHash(product.id)">
+                            Manage addons
+                          </button>
+                        </div>
+                        <div class="modal fade" id="{{getAddonModalId(product.id)}}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Product addons</h5>
+                              </div>
+                              <div class="modal-body">
+                                <div class="accordion" id="{{getProductAddonsId(product.id)}}">
+                                  <div class="accordion-item" *ngFor="let addon of product.addons">
+                                    <h2 class="accordion-header"
+                                      id="{{getUniqueAddonHeadingId(category.id, product.id, addon.id)}}">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="getUniqueAddonContentIdWithHash(category.id, product.id, addon.id)"
+                                        aria-expanded="false"
+                                        [attr.aria-controls]="getUniqueAddonContentId(category.id, product.id, addon.id)">
+                                        {{getAccordionAddonHeading(addon.name)}}
+                                      </button>
+                                    </h2>
+                                    <div id="{{getUniqueAddonContentId(category.id, product.id, addon.id)}}"
+                                      class="accordion-collapse collapse"
+                                      [attr.aria-labelledby]="getUniqueAddonHeadingId(category.id, product.id, addon.id)"
+                                      [attr.data-bs-parent]="getProductAddonsIdWithHash(product.id)">
+                                      <div class="accordion-body">
+                                        <div class="mb-3 row required">
+                                          <label for="{{getAddonNameId(category.id, product.id, addon.id)}}"
+                                            class="col-sm-2 col-form-label">Name</label>
+                                          <div class="col-sm-10 position-relative">
+                                            <input [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" type="text" class="form-control rounded-0"
+                                              id="{{getAddonNameId(category.id, product.id, addon.id)}}"
+                                              formControlName="{{getAddonNameId(category.id, product.id, addon.id)}}"
+                                              required>
+                                            <div class="invalid-tooltip"
+                                              *ngIf="getFormControl(getAddonNameId(category.id, product.id, addon.id))?.invalid && (getFormControl(getAddonNameId(category.id, product.id, addon.id))?.dirty || form.submitted)">
+                                              <i
+                                                *ngIf="getFormControl(getAddonNameId(category.id, product.id, addon.id))?.errors?.['required']">Field
+                                                required</i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="mb-3 row required">
+                                          <label for="{{getAddonPriceId(category.id, product.id, addon.id)}}"
+                                            class="col-sm-2 col-form-label">Price</label>
+                                          <div class="col-sm-10 position-relative">
+                                            <input [ngClass]="form.submitted ? 'was-validated' : 'no-validated'" type="text" class="form-control rounded-0"
+                                              id="{{getAddonPriceId(category.id, product.id, addon.id)}}"
+                                              formControlName="{{getAddonPriceId(category.id, product.id, addon.id)}}"
+                                              required>
+                                            <div class="invalid-tooltip"
+                                              *ngIf="getFormControl(getAddonPriceId(category.id, product.id, addon.id))?.invalid && (getFormControl(getAddonPriceId(category.id, product.id, addon.id))?.dirty || form.submitted)">
+                                              <i
+                                                *ngIf="getFormControl(getAddonPriceId(category.id, product.id, addon.id))?.errors?.['required']">Field
+                                                required></i>
+                                                <i
+                                                *ngIf="getFormControl(getAddonPriceId(category.id, product.id, addon.id))?.errors?.['invalidPrice']">Invalid price</i>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <button class="accordion-button accordion-none collapsed align-items-center"
+                                  type="button">
+                                  <i class="bi bi-plus-lg me-2"></i>
+                                  <p class="d-inline-flex p-0 m-0" (click)="onAddAddon(category.id, product)">Add addon
+                                  </p>
+                                </button>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3 row" *ngIf="this.menuState == 2">
+                        <label class="col-sm-2 col-form-label"
+                          for="{{getProductImageId(category.id, product.id)}}">Image</label>
+
+                        <div class="col-sm-10">
+                          <div class="form-control rounded-0 product-image" (click)="imageInput.click()">
+                            <img id="{{getProductImageId(category.id, product.id)}}_image"
+                              *ngIf="this.product.image; else imagePreview" [src]="'api'+this.product.image">
+                            <ng-template #imagePreview>
+                              <img id="{{getProductImageId(category.id, product.id)}}_image">
+                            </ng-template>
+                            <i class="bi bi-card-image"></i>
+                            <span class="upload-text">Upload image</span>
+                          </div>
+                          <input #imageInput id="{{getProductImageId(category.id, product.id)}}" type="file" hidden
+                            accept="image/png, image/bmp, image/jpeg"
+                            (change)="onProductImageChange($event, product, category.id)">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button accordion-none collapsed align-items-center" type="button"
+                      (click)="onAddProduct(category.id)">
+                      <i class="bi bi-plus-lg me-2"></i>
+                      <p class="d-inline-flex p-0 m-0">Add a product</p>
+                    </button>
+                  </h2>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="newCategory" (click)="onAddCategory()" *ngIf="!hasCategories()">
+          <i class="bi bi-plus-lg me-2"></i>
+          <p class="d-inline-flex">Add a new category</p>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-lg btn-danger me-1 rounded-0 text-white" type="button"
+            (click)="onDeleteMenu()">Delete</button>
+          <input type="submit" class="btn btn-lg btn-secondary rounded-0 text-white" value="Save">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

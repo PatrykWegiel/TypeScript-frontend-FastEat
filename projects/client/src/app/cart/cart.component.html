@@ -1,0 +1,168 @@
+<div class="container">
+  <h1>Podsumowanie</h1>
+  <div class="container con-table table-responsive">
+  <table class="table table-hover table-bordered">
+    <thead style="background-color: #0d6efd; color:white;user-select: none; border-color:black;">
+      <tr>
+        <th scope="col" class="center">#</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Dodatki</th>
+        <th scope="col" class="center">Ilość</th>
+        <th scope="col" class="center">Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cart.cartItems; index as i">
+        <td class="center">
+          {{i+1}}
+        </td>
+        <td>
+          {{cartItem.item.name}}
+        </td>
+        <td>
+          {{getProductSelectedAddons(cartItem)}}
+        </td>
+        <td class="center">
+          {{cartItem.amount}}
+        </td>
+        <td class="center">
+          {{getProductPrice(cartItem) /100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div >
+  <h2 class="price">Łącznie: {{cart.sum/100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}} </h2>
+  <h2 class="price">Koszt dostawy: {{restaurant?.deliveryCost | currency:'PLN':'symbol':'1.2-2':'pl-PL'}} </h2>
+  <form id="cartform" class="needs-validation" [formGroup]="form" (ngSubmit)="submitOrder">
+    <h2>Dane osobowe</h2>
+    <div class="row form-group">
+      <div class="col-md-6 mb-4">
+        <label class="form-label" for="firstName">Imię</label>
+        <div class="form-outline">
+          <input type="text" id="firstName" [(ngModel)]="firstName" name="firstName" class="form-control form-control-lg"
+           placeholder="Imię" formControlName="firstName" required />
+           <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">Imię jest wymagane</div>
+          </div>
+          </div>
+        
+      </div>
+      <div class="col-md-6 mb-4">
+        <label class="form-label" for="lastName">Nazwisko</label>
+        <div class="form-outline">
+          <input type="text" id="lastName" [(ngModel)]="lastName" name="lastName" class="form-control form-control-lg"
+            placeholder="Nazwisko"formControlName="lastName" required/>
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors.required">Nazwisko jest wymagane</div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="emailAddress">Email</label>
+        <div class="form-outline">
+          <input type="email" id="emailAddress" [(ngModel)]="emailAddress" name="emailAddress" class="form-control form-control-lg"
+            placeholder="Adres email" formControlName="emailAddress" required />
+            <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+              <div *ngIf="f.emailAddress.errors.required">Adres e-mail jest wymagany</div>
+            </div>
+          </div>
+
+      </div>
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="phoneNumber">Telefon</label>
+        <div class="form-outline">
+          <input type="tel" id="phoneNumber" [(ngModel)]="contactPhone" name="phoneNumber" class="form-control form-control-lg"
+            placeholder="Numer telefonu" formControlName="phoneNumber" required />
+            <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+              <div *ngIf="f.phoneNumber.errors.required">Numer telefonu jest wymagany</div>
+              <div *ngIf="f.phoneNumber.errors.pattern">Wprowadź numer</div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <h2>Adres dostawy</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="city">Miasto</label>
+        <div class="form-outline">
+          <input type="city" id="city" [(ngModel)]="city" name="city" class="form-control form-control-lg"
+            placeholder="Opole" formControlName="city" required/>
+            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+              <div *ngIf="f.city.errors.required">Miasto jest wymagane</div>
+            </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="cityCode">Kod pocztowy</label>
+        <div class="form-outline">
+          <input type="city-code" id="cityCode" [(ngModel)]="cityCode" name="cityCode" class="form-control  form-control form-control-lg"
+            placeholder="Kod pocztowy" formControlName="cityCode" required/>
+            <div *ngIf="submitted && f.cityCode.errors" class="invalid-feedback">
+              <div *ngIf="f.cityCode.errors.required">Kod pocztowy jest wymagany</div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="street">Ulica</label>
+        <div class="form-outline">
+          <input type="street" id="street" [(ngModel)]="street" name="street" class="form-control form-control-lg"
+            placeholder="Nazwa ulicy" formControlName="street" required/>
+            <div *ngIf="submitted && f.street.errors" class="invalid-feedback">
+              <div *ngIf="f.street.errors.required">Ulica jest wymagana</div>
+            </div>
+        </div>
+
+      </div>
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="apartmentNumber">Numer mieszkania</label>
+        <div class="form-outline">
+          <input type="apertmentNumber" [(ngModel)]="apartmentNumber" name="apartmentNumber" id="apartmentNumber" class="form-control form-control-lg"
+            placeholder="Numer mieszkania" formControlName="apartamentNumber" required />
+            <div *ngIf="submitted && f.apartamentNumber.errors" class="invalid-feedback">
+              <div *ngIf="f.apartamentNumber.errors.required">Numer mieszkania jest wymagany</div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="information">Dodatkowy komentarz</label>
+        <div class="form-outline">
+          <input type="information" id="information" [(ngModel)]="information" name="information" class="form-control form-control-lg"
+            placeholder="Dowolna informacja" />
+
+        </div>
+
+      </div>
+      <div class="col-md-6 mb-4 pb-2">
+        <label class="form-label" for="houseNumber">Numer budynku</label>
+        <div class="form-outline">
+          <input type="homeNumber" [(ngModel)]="houseNumber" name="houseNumber" id="houseNumber" class="form-control form-control-lg"
+            placeholder="Numer budynku" formControlName="homeNumber" required />
+            <div *ngIf="submitted && f.homeNumber.errors" class="invalid-feedback">
+              <div *ngIf="f.homeNumber.errors.required">Numer domu budynku jest wymagany</div>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mt-4 pt-2 submit-btn">
+<!--      <input class="btn btn-primary btn-lg" type="submit" value="Zamów i zapłać {{(cart.sum + restaurant?.deliveryCost * 100) / 100  | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}">-->
+       <input (click)="onSubmit((cart.sum + restaurant?.deliveryCost * 100) / 100 )" class="btn btn-primary btn-lg" type="submit" value="Zamów i zapłać {{(cart.sum + restaurant?.deliveryCost * 100) / 100  | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}"  style="background-color: #0d6efd; border-color:#0d6efd;" />
+    </div>
+  </form>
+
+</div>

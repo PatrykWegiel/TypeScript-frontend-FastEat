@@ -1,0 +1,148 @@
+$orange: #e68b39;
+* {
+  font-family: 'Rubik', sans-serif;
+  color: #666;
+}
+input:focus{
+    box-shadow: none;
+    border-color: $orange;
+}
+
+select{
+  border-color: transparent;
+  overflow: auto
+}
+select:focus{
+  box-shadow: none;
+  border-color: transparent
+}
+
+.btn, .btn-lg{
+  font-size: small;
+  text-transform: uppercase;
+}
+.btn:focus{
+  box-shadow: none;
+}
+div .registration-link{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.registration-link{
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: small;
+}
+.registration-link:hover{
+  color: $orange;
+}
+
+.signup-subheader {
+    text-transform: uppercase;
+    font-size: smaller;
+}
+
+.badge span[data-role="remove"]::after{
+  content: "x";
+  padding: 0px 2px;
+  padding-left: .25rem;
+  color: wheat;
+  cursor: pointer;
+}
+
+.badge.bg-orange{
+  background-color: $orange;
+  color: white;
+  font-weight: 200;
+  margin: 0 .25rem;
+}
+
+.form-floating>.form-select {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+div.kitchenTypes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  .kitchenTypes-list{
+    flex-basis: 1;
+  }
+}
+.image-change {
+  text-align: center;
+  margin-top: 1.7rem;
+  display: flex;
+  flex-direction: column;
+}
+.venue-image {
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  height: 300px;
+}
+
+.venue-image i {
+  transition: color 0.5s ease;
+  font-size: 75px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.venue-image:hover{
+  background: rgb(102 102 102 / 50%);
+}
+
+.venue-image:hover i {
+  color: white;
+  z-index: 2;
+}
+
+.upload-text {
+    transition: opacity 0.5s ease;
+    font-size: 30px;
+    color: white;
+    position: absolute;
+    bottom: 15%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.venue-image:hover .upload-text {
+  opacity: 1;
+  z-index: 2;
+}
+
+.venue-image img {
+  transition: opacity 0.5s ease;
+  width: 500px;
+  height: 300px;
+  z-index: 1;
+  position: relative;
+}
+
+.venue-image:hover img {
+  opacity: 0.5;
+}
+
+.delete-image { 
+  cursor: pointer;
+  width: 500px;
+  margin: 0 auto;
+  text-align: right;
+  transition: color 0.5s ease;
+}
+
+.delete-image:hover {
+  color: red;
+}

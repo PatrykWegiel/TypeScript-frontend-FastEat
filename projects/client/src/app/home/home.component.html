@@ -1,0 +1,5 @@
+<div class="container">
+  <app-searchbar (textFilterParam)="filterCities($event)" placeHolder="City"></app-searchbar>
+  <app-city-list [cityFilterText]=cityFilterText></app-city-list>
+  <router-outlet></router-outlet>
+</div>

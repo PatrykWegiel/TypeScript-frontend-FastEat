@@ -1,0 +1,67 @@
+<article class="postcard light red">
+  <div *ngIf="isAuthenticated()" class="favorite" (click)="onFavoriteClick(venue)">
+    <i *ngIf="!venue.favorite" class="bi bi-suit-heart"></i>
+    <i *ngIf="venue.favorite" class="bi bi-suit-heart-fill"></i>
+  </div>
+  <a class="postcard__img_link" routerLink="/menu/{{venue.id}}" routerLinkActive="active">
+    <img *ngIf="venue.image" class="postcard__img" src="api/images/{{venue.image}}" alt="{{venue.name}}" />
+    <img *ngIf="!venue.image" class="postcard__img"
+      src="https://media-cdn.tripadvisor.com/media/photo-s/1d/77/6c/3a/gastronomja-restauracja.jpg"
+      alt="{{venue.name}}" />
+  </a>
+  <div class="postcard__text t-dark">
+    <h1 class="postcard__title red">
+      <a routerLink="/menu/{{venue.id}}" routerLinkActive="active">{{venue.name}}</a>
+    </h1>
+    <div class="postcard__subtitle small">
+      <div *ngIf="venue.avg_rating > 0; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> <span class="fa fa-star checked"></span></ng-template>
+      <ng-template #elseBlock> <span class="fa fa-star"></span></ng-template>
+
+      <div *ngIf="venue.avg_rating > 1; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> <span class="fa fa-star checked"></span></ng-template>
+      <ng-template #elseBlock> <span class="fa fa-star"></span></ng-template>
+
+      <div *ngIf="venue.avg_rating > 2; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> <span class="fa fa-star checked"></span></ng-template>
+      <ng-template #elseBlock> <span class="fa fa-star"></span></ng-template>
+
+      <div *ngIf="venue.avg_rating > 3; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> <span class="fa fa-star checked"></span></ng-template>
+      <ng-template #elseBlock> <span class="fa fa-star"></span></ng-template>
+
+      <div *ngIf="venue.avg_rating > 4; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock> <span class="fa fa-star checked"></span></ng-template>
+      <ng-template #elseBlock> <span class="fa fa-star"></span></ng-template>
+    </div>
+    <div class="postcard__bar"></div>
+    <div class="postcard__preview-txt">{{venue.description}}
+    </div>
+    <ul class="postcard__tagbox">
+      <li class="tag__item red" *ngFor="let kitchen of venue.kitchenType">
+        {{kitchen.kitchenType}}
+      </li>
+    </ul>
+    <ul class="postcard__tagbox">
+      <li class="tag__item" *ngIf="venue.deliveryMinimalOrderPrice">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket2"
+          viewBox="0 0 16 16">
+          <path
+            d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0v-2zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0v-2z" />
+          <path
+            d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6H2.163z" />
+        </svg>
+        {{venue.deliveryMinimalOrderPrice}}
+      </li>
+      <li class="tag__item" *ngIf="venue.deliveryCost">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bicycle"
+          viewBox="0 0 16 16">
+          <path
+            d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z" />
+        </svg>
+        {{venue.deliveryCost}}
+      </li>
+    </ul>
+  </div>
+
+</article>

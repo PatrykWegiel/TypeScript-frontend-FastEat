@@ -1,0 +1,130 @@
+a {
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+    text-underline-offset: 0;
+}
+
+a:hover {
+    color: white;
+}
+
+.cart-footer > button {
+    width: 100%;
+}
+
+.card-group {
+    border-bottom: 1px solid #0d6efd;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.cart-header {
+    font-size: 20px;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #0d6efd;
+}
+
+.cart-list {
+    padding: 0 0.5rem;
+    height: 70vh;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+}
+
+.cart-footer {
+    width: 350px;
+    position:fixed;
+    bottom: 0;
+    padding: 10px;
+    background: white;
+}
+
+.cart-footer p {
+    margin: 0;
+}
+
+.cart-body {
+    position: sticky;
+    top: 0;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.cart-sidebar {
+    height: 100%;
+    width: 350px;
+    border-left: 1px solid #0d6efd;
+    right: 0;
+}
+
+.count-button {
+    background: white;
+    border: 1px solid #0d6efd;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    color: blue;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.count-button:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.remove-button {
+    background: white;
+    border: 1px solid red;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    color: red;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.remove-button:hover {
+    background-color: red;
+    color: white;
+}
+.right-btn {
+    text-align: right;
+}
+.cart-item-count {
+    text-align: center;
+}
+.remove-button,
+.count-button{
+    padding: 0;
+}
+.cart-btn{
+    width: 100%;
+    color: white;
+    background-color: #0d6efd;
+}
+.cart-btn:hover{
+    background-color: #0751c0;
+    border-color: #0751c0;
+}
+.product-addons {
+    height: 30px;
+    font-style: italic;
+}

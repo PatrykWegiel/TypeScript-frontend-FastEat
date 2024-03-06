@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-7">
+    <div class="card mb-4 rounded-0">
+      <h5 class="card-header">{{order!.id}}</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Client</span>
+          <span class="text-end">{{order!.user!.name}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Date</span>
+          <span class="text-end">{{getDate()}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="card rounded-0">
+      <ul class="list-group list-group-flush">
+        <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>Delivery method</span>
+            <span class="badge rounded-pill bg-secondary bg-secondary--lightend"></span>
+        </li> -->
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Payment</span>
+          <span class="badge rounded-pill bg-secondary bg-secondary--lightend">Debt cart</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Delivery address</span>
+          <span class="text-end">{{getAddress()}}<br/>{{order!.delivery!.city}}</span>
+        </li>
+      </ul>
+      <div class="card-body p-0">
+        <p class="card-text placeholder-glow">
+          <span class="placeholder col-12"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="card rounded-0">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item ">
+          <span class="fw-bold">Order</span>
+        </li>
+        <div class="order-item" *ngFor="let i of order!.orderItems">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="flex-grow-1">{{i.item.name}}</span>
+            <span>{{i.amount}}x</span>
+            <span class="ps-4">{{i.item.price / 100}} zł</span>
+          </li>
+          <div class="order-item" *ngFor="let a of i!.addons">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span class="flex-grow-1">+ {{a.name}}</span>
+              <span class="ps-4">{{a.price / 100}} zł</span>
+            </li>
+          </div>
+        </div>
+        <li class="list-group-item d-flex justify-content-end align-items-center">
+          <span class="fw-bolder">Delivery</span>
+          <span class="fw-bolder text-end ps-2">{{order!.venue.deliveryCost}} zł</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-end align-items-center">
+          <span class="fw-bolder text-uppercase">Total</span>
+          <span class="fw-bolder text-end ps-2">{{getPrice() / 100}} zł</span>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="isOrderNew()" class="d-flex my-3 justify-content-center">
+      <button type="button" class="btn btn-success btn-sm text-uppercase rounded-0" (click)="accept()">Accept</button>
+      <button type="button" class="btn btn-danger btn-sm text-uppercase rounded-0 ms-2" (click)="deny()">Deny</button>
+    </div>
+    <div *ngIf="isPending()" class="d-flex my-3 justify-content-center">
+      <button type="button" class="btn btn-success btn-sm text-uppercase rounded-0" (click)="complete()">compete
+      </button>
+    </div>
+  </div>
+</div>

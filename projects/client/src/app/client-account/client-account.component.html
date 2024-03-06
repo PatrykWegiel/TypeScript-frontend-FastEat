@@ -1,0 +1,51 @@
+<div class="container">
+    <h1>Dane użytkownika</h1>
+    <div class="user-panel">
+        <div class="user-avatar">
+            <img [src]="getUserImage()">
+            <div class="tooltip">
+                <i class="add-image bi bi-file-earmark-plus" (click)="fileInput.click()">
+                    <input #fileInput type="file" hidden name="image" accept="image/png, image/bmp, image/jpeg"
+                        (change)="changeImage($event)">
+                </i>
+                <span class="tooltiptext">Zmień swój avatar</span>
+            </div>
+        </div>
+        <div class="user-info">
+            <p>Nazwa użytkownika</p>
+            <p>{{getUsername()}}</p>
+            <p>Email</p>
+            <p>{{getEmail()}}</p>
+        </div>
+    </div>
+    <h1>Zmiana hasła</h1>
+    <form [formGroup]="form" #formDir="ngForm" class="col-6" style="margin: 0 auto;" (ngSubmit)="changePassword()">
+        <div class="col-12 position-relative">
+            <input type="password" id="password" [(ngModel)]="passwordManager.password" name="password"
+                class="form-control form-control-lg" ngModel placeholder="Hasło" formControlName="password" />
+            <div class="invalid-tooltip" *ngIf="password && password.invalid && formDir.submitted">
+                <i *ngIf="password.errors?.['required']">Pole wymagane</i>
+            </div>
+        </div>
+        <div class="col-12 position-relative">
+            <input type="password" name="newpassword" [(ngModel)]="passwordManager.newpassword" class="form-control form-control-lg"
+                ngModel placeholder="Nowe hasło" formControlName="newpassword" />
+            <div class="invalid-tooltip" *ngIf="newpassword && newpassword.invalid && formDir.submitted">
+                <i *ngIf="newpassword.errors?.['required']">Pole wymagane</i>
+                <i *ngIf="newpassword.errors?.['minlenght']">Nowe hasło jest za krótkie, wymagane minimum 3 znaki!</i>
+            </div>
+        </div>
+        <div class="col-12 position-relative">
+            <input type="password" name="repeatpassword" class="form-control form-control-lg" ngModel placeholder="Powtórz nowe hasło"
+                formControlName="repeatpassword" />
+            <div class="invalid-tooltip" *ngIf="(repeatpassword?.invalid || form.hasError('notSame')) && formDir.submitted">
+                <i *ngIf="repeatpassword?.errors?.['required']">Pole wymagane</i>
+                <i *ngIf="form.hasError('notSame')">Błędnie powtórzone hasło!</i>
+            </div>
+
+        </div>
+        <div class="col-12" style="display: flex;">
+            <input class="btn btn-primary btn-lg" type="submit" value="Zmień hasło">
+        </div>
+    </form>
+</div>

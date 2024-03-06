@@ -1,0 +1,59 @@
+<div class="col-12">
+  <ul class="list-group">
+    <li class="list-group-item sparkle u-hover--sparkle">
+      <i class="fa fa-filter" aria-hidden="true"></i> Filtruj
+      <ul>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Otwarte teraz
+          <label class="btn active">
+            <input #availability type="checkbox" name="options" id="availability" value="0" autocomplete="off"
+              (click)="onFilter()">
+          </label>
+        </li>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Darmowa dostawa
+          <label class="btn active">
+            <input #freeDelivery type="checkbox" name="options" id="freeDelivery" autocomplete="off"
+              (click)="onFilter()">
+          </label>
+        </li>
+        <li *ngIf="isAuthenticated()" class="list-group-secondary sparkle u-hover--sparkle">Ulubione
+          <label class="btn active">
+            <input #favorite type="checkbox"  name="options" id="freeDelivery" autocomplete="off"
+              (click)="onFilter()">
+          </label>
+        </li>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Ocena
+          <div id="rating" class="rating">
+            <input #rating0 type="radio" name="rating" value="5" id="5" (click)="onFilter()">
+            <label for="5">☆</label>
+            <input #rating1 type="radio" name="rating" value="4" id="4" (click)="onFilter()">
+            <label for="4">☆</label>
+            <input #rating2 type="radio" name="rating" value="3" id="3" (click)="onFilter()">
+            <label for="3">☆</label>
+            <input #rating3 type="radio" name="rating" value="2" id="2" (click)="onFilter()">
+            <label for="2">☆</label>
+            <input #rating4 type="radio" name="rating" value="1" id="1" (click)="onFilter()">
+            <label for="1">☆</label>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="list-group-item sparkle u-hover--sparkle">
+      <i class="fa fa-sort" aria-hidden="true"></i> Sortuj według
+      <ul>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Nazwy
+          <input #sortByName type="radio" name="sort" id="sortByName" (click)="onFilter()">
+        </li>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Oceny
+          <input #sortByRating type="radio" name="sort" (click)="onFilter()">
+        </li>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Kosztu dostawy
+          <input #deliveryCost type="radio" name="sort" (click)="onFilter()">
+        </li>
+        <li class="list-group-secondary sparkle u-hover--sparkle">Min. wartości zamówienia
+          <input #deliveryMinimalOrderPrice type="radio" name="sort" (click)="onFilter()">
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</div>

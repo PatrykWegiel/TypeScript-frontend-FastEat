@@ -1,0 +1,173 @@
+<div class="form-signup my-5">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="form" (submit)="onCorrect()">
+        <div class="form-floating">
+          <input [(ngModel)]="restaurateurDetails.name" type="text" class="form-control rounded-0" id="restaurantName"
+                 placeholder="name" formControlName="restaurantName">
+          <label for="restaurantName">Name</label>
+          <div *ngIf="restaurantName?.invalid && restaurantName?.touched"
+               class="alert alert-danger">
+            <div *ngIf="restaurantName?.errors?.['required']">
+              Name is required.
+            </div>
+            <div *ngIf="restaurantName?.errors?.['minlength']">
+              Name must be at least 4 characters long.
+            </div>
+          </div>
+        </div>
+        <div class="kitchenTypes">
+          <div class="kitchenTypes-list">
+            <span class="badge rounded-pill bg-orange" *ngFor="let kitchenType of chosenKitchenTypes">
+              {{kitchenType.kitchenType}}
+              <span data-role="remove" (click)="onRemoveKitchenType(kitchenType.id)"></span>
+            </span>
+          </div>
+          <div class="kitchenTypes-button">
+            <select *ngIf="isMaxAmountOfTypesSelected()" class="form-select rounded-0" formControlName="kitchenTypes"
+                    (change)="onChange()">
+              <option [ngValue]="null" disabled>Types of your cuisine</option>
+              <option *ngFor="let kitchenType of kitchenTypes" [ngValue]="kitchenType.id">
+                {{ kitchenType.kitchenType }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.description" type="text" class="form-control rounded-0"
+                     id="restaurantDescription" placeholder="name" formControlName="restaurantDescription">
+              <label for="restaurantDescription">Description</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.street" type="text" class="form-control rounded-0"
+                     id="restaurantStreet" placeholder="name"
+                     formControlName="restaurantStreet">
+              <label for="restaurantStreet">Street</label>
+              <div *ngIf="restaurantStreet?.invalid && restaurantStreet?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="restaurantStreet?.errors?.['required']">
+                  Street is required.
+                </div>
+                <div *ngIf="restaurantStreet?.errors?.['minlength']">
+                  Street must be at least 4 characters long.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.city" type="text" class="form-control rounded-0"
+                     id="restaurantCity" placeholder="name" formControlName="restaurantCity">
+              <label for="restaurantCity">City</label>
+              <div *ngIf="restaurantCity?.invalid && restaurantCity?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="restaurantCity?.errors?.['required']">
+                  City is required.
+                </div>
+                <div *ngIf="restaurantCity?.errors?.['minlength']">
+                  City must be at least 4 characters long.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.zipCode" type="text" class="form-control rounded-0"
+                     id="restaurantZipCode" placeholder="name"
+                     formControlName="restaurantZipCode">
+              <label for="restaurantZipCode">Zip code</label>
+              <small id="zipCodeHelp" class="form-text text-muted">Format XX-XXX</small>
+              <div *ngIf="restaurantZipCode?.invalid && restaurantZipCode?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="restaurantZipCode?.errors?.['required']">
+                  Zip code is required.
+                </div>
+                <div *ngIf="restaurantZipCode?.errors?.['pattern']">
+                  Wrong zip code format.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.phoneNumber" type="tel" class="form-control rounded-0"
+                     id="restaurantPhoneNumber" placeholder="name"
+                     formControlName="restaurantPhoneNumber">
+              <label for="restaurantPhoneNumber">Phone number</label>
+              <small id="phoneHelp" class="form-text text-muted">Format +48123123123 or 123123123</small>
+
+              <div *ngIf="restaurantPhoneNumber?.invalid && restaurantPhoneNumber?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="restaurantPhoneNumber?.errors?.['required']">
+                  Phone number is required.
+                </div>
+                <div *ngIf="restaurantPhoneNumber?.errors?.['maxlength']">
+                  Phone number is to long.
+                </div>
+                <div *ngIf="restaurantPhoneNumber?.errors?.['minlength']">
+                  Phone number is to short.
+                </div>
+                <div *ngIf="restaurantPhoneNumber?.errors?.['pattern']">
+                  Wrong phone number format.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.deliveryCost"  pattern="^\d*(\.\d{0,2})?$" type="tel" class="form-control rounded-0"
+                     id="deliveryCost" placeholder="name"
+                     formControlName="deliveryCost">
+              <label for="deliveryCost">Delivery cost</label>
+              <div *ngIf="deliveryCost?.invalid && deliveryCost?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="deliveryCost?.errors?.['required']">
+                  Delivery cost is required.
+                </div>
+                <div *ngIf="deliveryCost?.errors?.['min']">
+                  The value is too low.
+                </div>
+                <div *ngIf="deliveryCost?.errors?.['max']">
+                  The value is too high.
+                </div>
+                <div *ngIf="deliveryCost?.errors?.['pattern']">
+                  Wrong price format.
+                </div>
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input [(ngModel)]="restaurateurDetails.deliveryMinimalOrderPrice"  pattern="^\d*(\.\d{0,2})?$" type="number"
+                     class="form-control rounded-0" id="deliveryMinimalOrderPrice" placeholder="name"
+                     formControlName="deliveryMinimalOrderPrice">
+              <label for="deliveryMinimalOrderPrice">Minimal order price</label>
+              <div *ngIf="deliveryMinimalOrderPrice?.invalid && deliveryMinimalOrderPrice?.touched"
+                   class="alert alert-danger">
+                <div *ngIf="deliveryMinimalOrderPrice?.errors?.['required']">
+                  Minimal order price is required.
+                </div>
+                <div *ngIf="deliveryMinimalOrderPrice?.errors?.['min']">
+                  The value is too low.
+                </div>
+                <div *ngIf="deliveryMinimalOrderPrice?.errors?.['max']">
+                  The value is too high.
+                </div>
+                <div *ngIf="deliveryMinimalOrderPrice?.errors?.['pattern']">
+                  Wrong price format.
+                </div>
+              </div>
+            </div>
+            <button class="w-100 btn btn-lg btn-secondary rounded-0 text-white" type="submit">Correct</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <div class="mb-3 row image-change">
+        <h2>Image</h2>
+        <div class="form-control rounded-0 venue-image" (click)="fileInput.click()">
+          <img *ngIf="this.restaurateurDetails?.image" [src]="'api'+this.restaurateurDetails?.image"
+               alt="Restaurant image">
+          <i class="bi bi-card-image"></i>
+          <span class="upload-text">Upload image</span>
+        </div>
+        <span class="delete-image" (click)="onImageDelete()">Delete image &#10006;</span>
+        <input #fileInput id="file-upload" type="file" hidden accept="image/png, image/bmp, image/jpeg"
+               (change)="onImageUpload($event)">
+      </div>
+    </div>
+  </div>
+</div>

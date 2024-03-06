@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 border-end pt-2">
+            <app-orders-list  [orders]=orders (selectedOrder)="setCurrentOrder($event)"></app-orders-list>
+        </div>
+        <div class="col-8 py-5">
+            <app-order-info [order]=currentOrder></app-order-info>
+        </div>
+    </div>
+</div>
+
+

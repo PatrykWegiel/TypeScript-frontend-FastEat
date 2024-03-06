@@ -1,0 +1,26 @@
+<section>
+  <div class="col-12">
+    <div class="card">
+      <img *ngIf="product.image" src="api{{product.image}}" class="product-img" />
+      <img *ngIf="!product.image" src="http://simpleicon.com/wp-content/uploads/dish.png" class="product-img" />
+      <section class="product-card">
+        <div class="card-header">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="product-price">{{product.price/100 | currency:'PLN':'symbol':'2.2-2':'pl-PL'}}</p>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            {{product.description}}
+          </p>
+          <p *ngIf="product.addons.length > 0" class="product-addons">
+            Dodatki do wyboru: {{ getProductAddons(product) }}
+          </p>
+        </div>
+        <div class="card-footer">
+          <button class="cart-plus-btn" type="button" (click)="addProductToCart(product)"><i
+              class="bi bi-cart-plus"></i></button>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+.input-group{
+    width: 50%;
+    margin: 2% auto;
+  }
+  
+  .szukaj{
+    border-width: 0;
+  }
+  .szukaj:hover{
+        .input-group-text{
+            background-color: #f86600;
+            transition: 0.4s;
+            color:white;
+            padding-right: 24px;
+            padding-left:8px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+   background-color: #f86600;
+   transition: 0.4s;
+   color:white;
+   padding-right: 24px;
+   padding-left:8px;
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 10px;
+  }

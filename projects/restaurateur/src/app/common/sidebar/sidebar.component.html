@@ -1,0 +1,62 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-white sidebar collapse">
+  <div class="position-sticky pt-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="bi bi-large bi-bookmark-star"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="orders" routerLinkActive="active">
+          <i class="bi bi-large bi-box-seam"></i>
+          <span>Orders</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="delivery-zones" routerLinkActive="active">
+          <i class="bi bi-large bi-geo-alt"></i>
+          <span>Delivery zones</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="menu" routerLinkActive="active">
+          <i class="bi bi-large bi-book"></i>
+          <span>Menu</span>
+        </a>
+      </li>
+      <!-- <li class="nav-item">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#restaurant-collapse" aria-expanded="false">
+          Restaurant
+        </button>
+        <div class="collapse" id="restaurant-collapse">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <li><a href="#" class="link-dark rounded">Opening hours</a></li>
+            <li><a href="#" class="link-dark rounded">Delivery zones</a></li>
+          </ul>
+        </div>
+      </li> -->
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Restaurant</span>
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="configuration" routerLinkActive="active">
+          <span>Configuration</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="test2" routerLinkActive="active">
+          <span>Reservations</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link logout" routerLink="" (click)="onLogout()">
+          <span>Logout</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

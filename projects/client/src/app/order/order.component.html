@@ -1,0 +1,65 @@
+<div class="container">
+    <h1>Historia zamówień</h1>
+    <div class="container con-table table-responsive">
+    <table class="table table-bordered">
+        <thead style="background-color: #0d6efd; color:white;">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Restauracja</th>
+                <th scope="col">Status</th>
+                <th scope="col">Data</th>
+                <th scope="col">Szczegóły zamówienia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let order of orders; index as i">
+                <tr class="accordion mb-5" id="{{getHeaderId(i)}}">
+                    <td class="id">
+                        {{i+1}}
+                    </td>
+                    <td>
+                        {{order.venue.name}}
+                    </td>
+                    <td class="order-col">
+                        {{status[order.status]}}
+                    </td>
+                    <td class="order-col">
+                        {{order.creationDate | date:'dd/MM/yyyy HH:mm'}}
+                    </td>
+                    <td class="order-col">
+                        <button class="accordion-button collapsed" style="width: 150px;float: right;" type="button" data-bs-toggle="collapse"
+                            [attr.data-bs-target]="addHash(getDetailId(i))" aria-expanded="false" [attr.aria-controls]="getDetailId(i)">szczegóły
+                        </button>
+                    </td>
+                </tr>
+                <tr id="{{getDetailId(i)}}" class="accordion-collapse collapse" [attr.data-bs-parent]="addHash(getHeaderId(i))">
+                    <td colspan="5">
+                        <table class="table table-hover accordion-body" style="width: 100%;">
+                            <thead>
+                                <tr style="border-bottom-width: 1px;">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nazwa produktu</th>
+                                    <th scope="col">Cena</th>
+                                    <th scope="col">Ilość</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let orderItem of order.orderItems; index as j">
+                                <td>{{j+1}}</td>
+                                <td>{{orderItem.item.name}} <i class="order-addons">{{getProductAddons(orderItem)}}</i></td>
+                                <td>{{getProductPriceWithAddons(orderItem)/100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}</td>
+                                <td>{{orderItem.amount}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Adres dostawy: {{getDeliveryAddress(order.delivery)}}</td>
+                                <td style="text-align: right;" colspan="2">Łącznie: {{orderPrice(order) / 100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    </div>
+</div>

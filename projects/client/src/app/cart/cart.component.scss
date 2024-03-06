@@ -1,0 +1,33 @@
+.btn:hover{
+    background-color: #f86600;
+    p{
+        color:white;
+
+    }
+    transition: 0.2s;
+}
+
+.price {
+    text-align: right;
+}
+
+.container {
+    margin: 1rem auto;
+    user-select: none;
+}
+
+.submit-btn {
+    text-align: right;
+}
+
+.con-table{
+    border:solid 0.5px black;
+    border-radius: 20px;
+    padding: 3%;
+}
+td{
+    user-select: none;
+}
+.center{
+    text-align: center;
+}

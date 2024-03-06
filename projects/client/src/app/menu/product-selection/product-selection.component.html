@@ -1,0 +1,43 @@
+<div class="modal-background"  id="modal-background">
+    <div class="modal-window">
+        <div class="card border-dark main_card">
+            <div class="card-header">
+                {{product.item.name}}
+            </div>
+            <div class="card-body">
+                <p class="card-title">Dodatki do wyboru:</p>
+                
+                <div  *ngFor="let addon of product.addons">
+                    <div class="container form-check form-switch">
+                    <label class="form-check-label" for="{{addon.id}}">{{addon.name}} (+{{addon.price /100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}}) </label>
+                    <input class="form-check-input" (click)="selectAddon(addon.id)" type="checkbox" id="{{addon.id}}">
+                </div>
+            </div>
+            </div>
+            <div class="card-footer form-row">
+                <div class="col-1"></div>
+                <div class="col-1">
+                    <button (click)="countDown()" [disabled]="product.amount < 2" class="count-button minus">
+                        <i class="bi bi-dash"></i>
+                    </button>
+                </div>
+                <div class="col-1 item-count">
+                    <p class="count">{{product.amount}}</p>
+                </div>
+                <div (click)="countUp()" class="col-1  ">
+                    <button class="count-button plus">
+                        <i class="bi bi-plus" ></i>
+                    </button>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-7 summary">
+                    <p>Łącznie: {{sum /100 | currency:'PLN':'symbol':'1.2-2':'pl-PL'}} </p>
+                </div>
+
+                <div class="col-9 right-btn">
+                    <button (click)="selectProduct()" class="btn-outline-primary cart-btn">Dodaj do koszyka</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

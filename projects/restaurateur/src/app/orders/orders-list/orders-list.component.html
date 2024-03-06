@@ -1,0 +1,8 @@
+<div class="orders-list">
+    <div class="order-item" *ngFor="let o of orders">
+      <div (click)="setOrder(o)">
+                <app-order-item [order]=o></app-order-item>
+      </div>
+
+    </div>
+</div>
